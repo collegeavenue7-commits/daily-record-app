@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Daily Record Tracker</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+    th, td { border: 1px solid #999; padding: 8px; text-align: center; }
+    h2 { background-color: #f2f2f2; padding: 10px; }
+    input[type="number"], input[type="text"] { width: 100%; }
+  </style>
+</head>
+<body>
+
+<h1>Daily Record Tracker</h1>
+
+<h2>Cash & Cards</h2>
+<table>
+  <tr><th>Type</th><th>Amount</th></tr>
+  <tr><td>Total Cash In Hand</td><td><input type="number" id="cash_in_hand"></td></tr>
+  <tr><td>Credit Card</td><td><input type="number" id="credit_card"></td></tr>
+  <tr><td>Debit Card</td><td><input type="number" id="debit_card"></td></tr>
+  <tr><td>Lotto Payout</td><td><input type="number" id="lotto_payout"></td></tr>
+  <tr><td>Coupons</td><td><input type="number" id="coupons"></td></tr>
+  <tr><td>Refunds</td><td><input type="number" id="refunds"></td></tr>
+</table>
+
+<h2>Sales</h2>
+<table>
+  <tr><th>Type</th><th>Amount</th></tr>
+  <tr><td>Cigarette</td><td><input type="number" id="cigarette_sales"></td></tr>
+  <tr><td>Soda</td><td><input type="number" id="soda_sales"></td></tr>
+  <tr><td>Taxable Sales</td><td><input type="number" id="taxable_sales"></td></tr>
+  <tr><td>Non-Taxable Sales</td><td><input type="number" id="non_taxable_sales"></td></tr>
+  <tr><td>Total Inside Sales</td><td><input type="number" id="total_inside_sales"></td></tr>
+</table>
+
+<h2>Gas Sales</h2>
+<table>
+  <tr><th>Type</th><th>Gallons</th><th>Price</th><th>Amount</th></tr>
+  <tr>
+    <td>Unleaded</td>
+    <td><input type="number" id="unleaded_gallons"></td>
+    <td><input type="number" id="unleaded_price"></td>
+    <td><input type="number" id="unleaded_amount"></td>
+  </tr>
+  <tr>
+    <td>Silver</td>
+    <td><input type="number" id="silver_gallons"></td>
+    <td><input type="number" id="silver_price"></td>
+    <td><input type="number" id="silver_amount"></td>
+  </tr>
+  <tr>
+    <td>Premium</td>
+    <td><input type="number" id="premium_gallons"></td>
+    <td><input type="number" id="premium_price"></td>
+    <td><input type="number" id="premium_amount"></td>
+  </tr>
+</table>
+
+<h2>Vendor Payout</h2>
+<table>
+  <tr><th>Vendor</th><th>Item</th><th>Amount</th><th>Payment Type</th></tr>
+  <tr>
+    <td><input type="text" id="vendor_name"></td>
+    <td><input type="text" id="vendor_item"></td>
+    <td><input type="number" id="vendor_amount"></td>
+    <td><input type="text" id="vendor_type"></td>
+  </tr>
+</table>
+
+<h2>Daily Summary</h2>
+<button onclick="calculateTotal()">Calculate Summary</button>
+<p id="summary"></p>
+
+<script>
+function calculateTotal() {
+  const cash = parseFloat(document.getElementById('cash_in_hand').value || 0);
+  const credit = parseFloat(document.getElementById('credit_card').value || 0);
+  const debit = parseFloat(document.getElementById('debit_card').value || 0);
+  const totalSales = parseFloat(document.getElementById('total_inside_sales').value || 0);
+  const refunds = parseFloat(document.getElementById('refunds').value || 0);
+
+  const gas1 = parseFloat(document.getElementById('unleaded_amount').value || 0);
+  const gas2 = parseFloat(document.getElementById('silver_amount').value || 0);
+  const gas3 = parseFloat(document.getElementById('premium_amount').value || 0);
+  const totalGas = gas1 + gas2 + gas3;
+
+  const grandTotal = cash + credit + debit + totalSales + totalGas - refunds;
+
+  document.getElementById('summary').innerText = Total Revenue for the Day: $${grandTotal.toFixed(2)};
+}
+</script>
+
+</body>
+</html>
